@@ -150,31 +150,13 @@ public class MainActivity extends Activity implements IabBroadcastListener,
         // load game data
         loadData();
 
-        /* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
-         * (that you got from the Google Play developer console). This is not your
-         * developer public key, it's the *app-specific* public key.
-         *
-         * Instead of just storing the entire literal string here embedded in the
-         * program,  construct the key at runtime from pieces or
-         * use bit manipulation (for example, XOR with some other string) to hide
-         * the actual key.  The key itself is not secret information, but we don't
-         * want to make it easy for an attacker to replace the public key with one
-         * of their own and then fake messages from the server.
-         */
-        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiXzTGkGnAHmOCr6VZvYHF1s5tgQB+3+XmqH1sfSImiMWXYVGGXt/6UoFtEXNST/BVN+vPrj6UkI4vBD9DJxmki6L5oU5GiiNRRvmDKolpCSpfaHwnPBvJdoEdASUFy0LrQd6KLF/mtr0/1Sz5D5rvWtUO6Tchg2joePKaVqBE4SJIA9teogMI9TewH/g8M3QzfBerF4xqv/n7ypZ12wV4rb2gOV8oGafHeya05ib23T9QMR+bnrkymMNxCyoeZr2o2AWIofve3dxJxNJrVg03zVAEihsv0fDcJhQp/PDVpJWD2pUN7/V9uPdULViaKoPuaPGeCdq2U+kJBCu049hQwIDAQAB";
-
-        // Some sanity checks to see if the developer (that's you!) really followed the
-        // instructions to run this sample (don't put these checks on your app!)
-        if (base64EncodedPublicKey.contains("CONSTRUCT_YOUR")) {
-            throw new RuntimeException("Please put your app's public key in MainActivity.java. See README.");
-        }
         if (getPackageName().startsWith("com.example")) {
             throw new RuntimeException("Please change the sample's package name! See README.");
         }
 
         // Create the helper, passing it our context and the public key to verify signatures with
         Log.d(TAG, "Creating IAB helper.");
-        mHelper = new IabHelper(this, base64EncodedPublicKey);
+        mHelper = new IabHelper(this);
 
         // enable debug logging (for a production application, you should set this to false).
         mHelper.enableDebugLogging(true);

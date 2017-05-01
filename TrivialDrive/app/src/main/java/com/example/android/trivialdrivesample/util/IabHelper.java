@@ -115,9 +115,6 @@ public class IabHelper {
     // The item type of the current purchase flow
     String mPurchasingItemType;
 
-    // Public key for verifying signature, in base64 encoding
-    String mSignatureBase64 = null;
-
     // Billing response codes
     public static final int BILLING_RESPONSE_RESULT_OK = 0;
     public static final int BILLING_RESPONSE_RESULT_USER_CANCELED = 1;
@@ -168,14 +165,9 @@ public class IabHelper {
      * block and is safe to call from a UI thread.
      *
      * @param ctx Your application or Activity context. Needed to bind to the in-app billing service.
-     * @param base64PublicKey Your application's public key, encoded in base64.
-     *     This is used for verification of purchase signatures. You can find your app's base64-encoded
-     *     public key in your application's page on Google Play Developer Console. Note that this
-     *     is NOT your "developer public key".
      */
-    public IabHelper(Context ctx, String base64PublicKey) {
+    public IabHelper(Context ctx) {
         mContext = ctx.getApplicationContext();
-        mSignatureBase64 = base64PublicKey;
         logDebug("IAB helper created.");
     }
 
