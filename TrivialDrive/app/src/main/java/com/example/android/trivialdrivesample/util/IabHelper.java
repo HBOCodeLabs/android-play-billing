@@ -555,14 +555,7 @@ public class IabHelper {
                 purchase = new Purchase(mPurchasingItemType, purchaseData, dataSignature);
                 String sku = purchase.getSku();
 
-                // Verify signature
-                if (!Security.verifyPurchase(mSignatureBase64, purchaseData, dataSignature)) {
-                    logError("Purchase signature verification FAILED for sku " + sku);
-                    result = new IabResult(IABHELPER_VERIFICATION_FAILED, "Signature verification failed for sku " + sku);
-                    if (mPurchaseListener != null) mPurchaseListener.onIabPurchaseFinished(result, purchase);
-                    return true;
-                }
-                logDebug("Purchase signature successfully verified.");
+                // We verify the purchase on the server
             }
             catch (JSONException e) {
                 logError("Failed to parse purchase data.");
@@ -969,24 +962,16 @@ public class IabHelper {
                 String purchaseData = purchaseDataList.get(i);
                 String signature = signatureList.get(i);
                 String sku = ownedSkus.get(i);
-                if (Security.verifyPurchase(mSignatureBase64, purchaseData, signature)) {
-                    logDebug("Sku is owned: " + sku);
-                    Purchase purchase = new Purchase(itemType, purchaseData, signature);
+                logDebug("Sku is owned: " + sku);
+                Purchase purchase = new Purchase(itemType, purchaseData, signature);
 
-                    if (TextUtils.isEmpty(purchase.getToken())) {
-                        logWarn("BUG: empty/null token!");
-                        logDebug("Purchase data: " + purchaseData);
-                    }
+                if (TextUtils.isEmpty(purchase.getToken())) {
+                    logWarn("BUG: empty/null token!");
+                    logDebug("Purchase data: " + purchaseData);
+                }
 
-                    // Record ownership and token
-                    inv.addPurchase(purchase);
-                }
-                else {
-                    logWarn("Purchase signature verification **FAILED**. Not adding item.");
-                    logDebug("   Purchase data: " + purchaseData);
-                    logDebug("   Signature: " + signature);
-                    verificationFailed = true;
-                }
+                // Record ownership and token
+                inv.addPurchase(purchase);
             }
 
             continueToken = ownedItems.getString(INAPP_CONTINUATION_TOKEN);
