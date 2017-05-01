@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.trivialdrivesample;
+package com.hbo.android.trivialdrivesample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -161,7 +161,7 @@ public class MainActivity extends Activity implements IabBroadcastListener,
          * want to make it easy for an attacker to replace the public key with one
          * of their own and then fake messages from the server.
          */
-        String base64EncodedPublicKey = "CONSTRUCT_YOUR_KEY_AND_PLACE_IT_HERE";
+        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiXzTGkGnAHmOCr6VZvYHF1s5tgQB+3+XmqH1sfSImiMWXYVGGXt/6UoFtEXNST/BVN+vPrj6UkI4vBD9DJxmki6L5oU5GiiNRRvmDKolpCSpfaHwnPBvJdoEdASUFy0LrQd6KLF/mtr0/1Sz5D5rvWtUO6Tchg2joePKaVqBE4SJIA9teogMI9TewH/g8M3QzfBerF4xqv/n7ypZ12wV4rb2gOV8oGafHeya05ib23T9QMR+bnrkymMNxCyoeZr2o2AWIofve3dxJxNJrVg03zVAEihsv0fDcJhQp/PDVpJWD2pUN7/V9uPdULViaKoPuaPGeCdq2U+kJBCu049hQwIDAQAB";
 
         // Some sanity checks to see if the developer (that's you!) really followed the
         // instructions to run this sample (don't put these checks on your app!)
